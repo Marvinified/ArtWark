@@ -11,5 +11,5 @@
 |
 */
 
-Route::get("/{all}",'main');
-Route::get("/",'main');
+Route::view("/{all}",'main');
+Route::view("/",'main');
