@@ -27843,11 +27843,6 @@ var Tr = function Tr(_ref) {
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "td",
-            { id: "id" },
-            row.id
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "td",
             { id: "info" },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "h3",
@@ -27899,11 +27894,6 @@ var CartTable = function CartTable(_ref2) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "tr",
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "th",
-                    { id: "id" },
-                    "ID"
-                ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "th",
                     { id: "info" },
