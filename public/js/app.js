@@ -28001,12 +28001,12 @@ var Footer = function Footer() {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "a",
-                { href: "" },
+                { href: "https://github.com/Marvin-Tunji-ola" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "../images/github.png", alt: "" })
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "a",
-                { href: "" },
+                { href: "https://www.linkedin.com/in/marvin-tunji-ola-32a340111/" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "../images/linkedin.png", alt: "" })
             )
         )
