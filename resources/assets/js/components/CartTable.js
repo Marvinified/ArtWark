@@ -12,7 +12,7 @@ const Tr = ({row, onUpdateQuantity, onRemove})=>{
     }
     return(
         <tr>
-            <td id="id">{row.id}</td>
+            {/* <td id="id">{row.id}</td> */}
             <td id="info">
                 <h3>{row.name}</h3>
                 <div >{  row.description}</div>
@@ -35,7 +35,7 @@ const CartTable = ({data, onUpdateItemQuantity, onRemoveItem})=>{
         <table>
             <thead>
                 <tr>
-                    <th id="id">ID</th>
+                    {/* <th id="id">ID</th> */}
                     <th id="info">Item</th>
                     <th id="quantity">Quantity</th>
                     <th>Amount</th>
