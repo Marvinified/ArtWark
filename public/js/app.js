@@ -26543,7 +26543,7 @@ var ArtWark = function (_Component) {
                                 response = null;
                                 amount = 0;
 
-                                this.setState({ loading: { cart: true } });
+                                catalog.length && this.setState({ loading: { cart: true } });
                                 catalog.map(function (item) {
                                     var id = item.id;
                                     var quantity = item.quantity;

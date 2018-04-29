@@ -202,7 +202,7 @@ class ArtWark extends Component{
         let old = false;
         let response = null;
         let amount = 0;
-        this.setState({loading:{ cart: true }})
+        catalog.length && this.setState({loading:{ cart: true }})
         catalog.map(item=>{
             const id = item.id;
             const quantity = item.quantity;
