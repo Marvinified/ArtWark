@@ -11,10 +11,10 @@ const Footer = ()=>{
                 <a href="https://twitter.com/Marvinified">
                     <img src="../images/tweet.png" alt=""/>
                 </a>
-                <a href="">
+                <a href="https://github.com/Marvin-Tunji-ola">
                     <img src="../images/github.png" alt=""/>
                 </a>
-                <a href="">
+                <a href="https://www.linkedin.com/in/marvin-tunji-ola-32a340111/">
                     <img src="../images/linkedin.png" alt=""/>
                 </a>
             </div>
