@@ -26159,9 +26159,10 @@ var Banner = function (_Component) {
 
 var Cart = function Cart(_ref) {
     var data = _ref.data,
-        total = _ref.total,
         onUpdateItemQuantity = _ref.onUpdateItemQuantity,
-        onRemoveItem = _ref.onRemoveItem;
+        onRemoveItem = _ref.onRemoveItem,
+        loading = _ref.loading,
+        error = _ref.error;
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -26177,16 +26178,26 @@ var Cart = function Cart(_ref) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'panel-body' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components__["f" /* CartTable */], { data: data, onUpdateItemQuantity: onUpdateItemQuantity, onRemoveItem: onRemoveItem })
+                !error ? !loading ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__components__["f" /* CartTable */], { data: data.items, onUpdateItemQuantity: onUpdateItemQuantity, onRemoveItem: onRemoveItem }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'h3',
+                    null,
+                    'Loading...'
+                ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'h3',
+                    null,
+                    'Oops! ',
+                    error,
+                    ' Occured'
+                )
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            !loading && !error && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'panel-footer' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'span',
                     null,
                     'Total:\xA0$',
-                    total
+                    data.total
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'span',
@@ -26264,6 +26275,14 @@ var ArtWark = function (_Component) {
             paginate: {
                 next: 1,
                 total: 1
+            },
+            loading: {
+                cart: false,
+                deck: false
+            },
+            error: {
+                cart: false,
+                deck: false
             }
 
         };
@@ -26524,10 +26543,11 @@ var ArtWark = function (_Component) {
                                 response = null;
                                 amount = 0;
 
-
+                                this.setState({ loading: { cart: true } });
                                 catalog.map(function (item) {
                                     var id = item.id;
                                     var quantity = item.quantity;
+
                                     if (old) {
                                         response = __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get('api/product/' + id).then(function (response) {
                                             var total = response.data.price * quantity;
@@ -26536,9 +26556,20 @@ var ArtWark = function (_Component) {
                                                 cart: _extends({}, _this5.state.cart, {
                                                     items: [].concat(_toConsumableArray(_this5.state.cart.items), [_extends({}, response.data, { quantity: quantity, total: total })]),
                                                     amount: amount
-                                                })
+                                                }),
+                                                loading: {
+                                                    cart: false
+                                                },
+                                                error: {
+                                                    cart: false
+                                                }
                                             });
                                             _this5.setState(state);
+                                        }).catch(function (error) {
+                                            console.log(error.message);
+                                            _this5.setState({ error: {
+                                                    cart: error.message
+                                                } });
                                         });
                                     } else {
                                         response = __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get('api/product/' + id).then(function (response) {
@@ -26549,20 +26580,31 @@ var ArtWark = function (_Component) {
                                                     items: [_extends({}, response.data, { quantity: quantity, total: total })],
                                                     amount: amount
 
-                                                })
+                                                }),
+                                                loading: {
+                                                    cart: false
+                                                },
+                                                error: {
+                                                    cart: false
+                                                }
                                             });
                                             _this5.setState(state);
+                                        }).catch(function (error) {
+                                            console.log(error.message);
+                                            _this5.setState({ error: {
+                                                    cart: error.message
+                                                } });
                                         });
                                         old = true;
                                     }
                                 });
-                                _context4.next = 6;
+                                _context4.next = 7;
                                 return response;
 
-                            case 6:
+                            case 7:
                                 return _context4.abrupt('return', _context4.sent);
 
-                            case 7:
+                            case 8:
                             case 'end':
                                 return _context4.stop();
                         }
@@ -26720,10 +26762,11 @@ var ArtWark = function (_Component) {
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], { path: '/cart', render: function render() {
                             return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components__["e" /* Cart */], {
-                                data: _this6.state.cart.items,
-                                total: _this6.state.cart.amount,
+                                data: { items: _this6.state.cart.items, total: _this6.state.cart.amount },
                                 onUpdateItemQuantity: _this6.updateCartItemQuantity,
-                                onRemoveItem: _this6.removeCartItem
+                                onRemoveItem: _this6.removeCartItem,
+                                loading: _this6.state.loading.cart,
+                                error: _this6.state.error.cart
                             });
                         }
                     })

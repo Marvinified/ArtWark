@@ -25,6 +25,14 @@ class ArtWark extends Component{
             paginate:{
                 next:1,
                 total:1
+            },
+            loading:{
+                cart:false,
+                deck:false
+            },
+            error:{
+                cart:false,
+                deck:false,
             }
             
 
@@ -194,10 +202,11 @@ class ArtWark extends Component{
         let old = false;
         let response = null;
         let amount = 0;
-        
+        this.setState({loading:{ cart: true }})
         catalog.map(item=>{
             const id = item.id;
             const quantity = item.quantity;
+            
             if(old){
                  response = axios.get(`api/product/${id}`).then(response=>{
                     const total = response.data.price*quantity
@@ -207,9 +216,20 @@ class ArtWark extends Component{
                             ...this.state.cart,
                             items:[...this.state.cart.items, {...response.data, quantity, total }],
                             amount:amount
+                        },
+                        loading:{
+                            cart:false
+                        },
+                        error:{
+                            cart: false
                         }
                     })
                     this.setState(state)
+                }).catch(error=>{
+                    console.log(error.message);
+                    this.setState({error:{
+                        cart: error.message
+                    }})
                 })
             }else{
                 response = axios.get(`api/product/${id}`).then(response=>{
@@ -221,9 +241,20 @@ class ArtWark extends Component{
                             items:[{...response.data, quantity, total}],
                             amount:amount
                             
+                        },
+                        loading:{
+                            cart:false
+                        },
+                        error:{
+                            cart: false
                         }
                     })
                     this.setState(state)
+                }).catch(error=>{
+                    console.log(error.message);                    
+                    this.setState({error:{
+                        cart: error.message
+                    }})
                 })
                 old = true;
             }
@@ -367,10 +398,11 @@ class ArtWark extends Component{
                     
                     <Route path="/cart" render={()=>
                             <Cart 
-                            data={this.state.cart.items} 
-                            total = {this.state.cart.amount}
+                            data={{items:this.state.cart.items, total:this.state.cart.amount}} 
                             onUpdateItemQuantity={this.updateCartItemQuantity} 
                             onRemoveItem={this.removeCartItem} 
+                            loading={this.state.loading.cart}
+                            error={this.state.error.cart}
                             />
                         
                     }
